@@ -1,0 +1,37 @@
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: notedrop-db
+    restart: always
+    ports:
+      - "5433:5432"  # ⬅ HOST:CONTAINER (fixes the port conflict)
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: notedrop
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: notedrop-api
+    ports:
+      - "3600:3600"
+    depends_on:
+      - postgres
+    environment:
+      # ⬇ INSIDE container uses "postgres" host, not localhost
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/notedrop?schema=public
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: ${PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npx prisma migrate dev --name init && npm run dev"
+
+volumes:
+  pgdata:
+

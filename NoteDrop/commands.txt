@@ -1,0 +1,148 @@
+
+---- To Register an user ----
+
+curl -X POST http://localhost:3600/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@mail.com", "password": "123456"}'
+
+If everything implemented correctly, you should get:
+
+{
+  "message": "User registered successfully",
+  "user": {
+    "id": "...",
+    "email": "user@mail.com",
+    "role": "USER"
+  },
+  "token": "..."
+}
+
+---- To Login ----
+
+curl -X POST http://localhost:3600/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@mail.com", "password": "123456"}'
+
+If everything implemented correctly, you should get:
+{
+  "message": "Login successful",
+  "user": {
+    "id": "some-uuid",
+    "email": "user@mail.com",
+    "role": "USER"
+  },
+  "token": "..."
+}
+
+---- Test If The Protected User Works ----
+curl -X GET http://localhost:3600/api/auth/me \
+  -H "Authorization: Bearer <your-token>"
+
+--If you entered the valid token, you should get:
+{
+  "message": "You are authenticated",
+  "user": {
+    "userId": "8cf84184-fb7f-4a75-b862-74ebcfef1794",
+    "role": "USER"
+  }
+}
+-- If Token not good:
+{ "error": "Not authorized" }
+
+---- To Test The Roles (ADMIN/USER) ----
+curl -X DELETE http://localhost:3600/api/auth/user/some-id \
+  -H "Authorization: Bearer <user-token>"
+
+ You are not an admin, you will get this:
+{
+  "error": "Forbidden: Insufficient role"
+}
+
+
+---- Admin User ----
+'{"email": "egs@mail.com", "password": "eg123456"}'
+
+
+---- To Post A New Note ----
+
+curl -X POST http://localhost:3600/api/notes \
+  -H "Authorization: Bearer <your-jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Launch Plan",
+    "content": "We deploy at dawn.",
+    "isPublic": true
+  }'
+
+--If you entered the valid token, you should get:
+{
+  "message": "Note created",
+  "note": {
+    "id": "...",
+    "slug": "launch-plan-a1b2c3",
+    "isPublic": true,
+    "userId": "...",
+    "createdAt": "...",
+    ...
+  }
+}
+
+---- To Get Own Post ----
+curl -X GET http://localhost:3600/api/notes/me \
+  -H "Authorization: Bearer <your-jwt>"
+
+--If you entered the valid token, you should get:
+{
+  "count": 2,
+  "notes": [
+    {
+      "id": "uuid1",
+      "title": "Secret Plan",
+      "isPublic": true,
+      "slug": "secret-plan-xyz123",
+      "createdAt": "2025-10-09T18:42:00Z"
+    },
+    {
+      "id": "uuid2",
+      "title": "Draft Idea",
+      "isPublic": false,
+      "slug": "draft-idea-abc456",
+      "createdAt": "2025-10-08T22:11:00Z"
+    }
+  ]
+}
+
+or the number of your posts, or you can check it in prisma
+
+
+---- To Fetch Public Notes ----
+
+GET /api/notes/:slug — View Public Notes by Slug
+This endpoint lets anyone (even without a token) fetch a public note by its unique slug like:
+
+
+curl -X GET http://localhost:3600/api/notes/secret-plan-abc123
+If there's no public notes, you should get:
+{ "error": "Note not found or not public" }
+
+If not, then you should see:
+{
+  "note": {
+    "title": "Secret Plan",
+    "content": "Launch at dawn",
+    "createdAt": "2025-10-09T22:17:00Z",
+    "slug": "secret-plan-abc123"
+  }
+}
+
+
+---- To Delete Note ----
+curl -X DELETE http://localhost:3600/api/notes/<noteId> \
+  -H "Authorization: Bearer <your-user-token>"
+
+If you entered the correct token, you should see:
+{ "message": "Note deleted successfully" }
+
+If not, then:
+{ "error": "Not authorized to delete this note" }
+
