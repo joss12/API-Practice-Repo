@@ -1,0 +1,36 @@
+
+version: '3.8'
+
+services:
+  logiform-node:
+    build: .
+    container_name: logiform-node
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3600:3600"
+    volumes:
+      - ./data.json:/app/src/data.json
+      - ./users.json:/app/users.json
+      - ./src:/app/src
+    networks:
+      - logiform-net
+
+  logiform-nginx:
+    image: nginx:stable-alpine
+    container_name: logiform-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./public:/usr/share/nginx/html             # ✅ Serve static HTML files
+    depends_on:
+      - logiform-node
+    networks:
+      - logiform-net
+
+networks:
+  logiform-net:
+    driver: bridge
+

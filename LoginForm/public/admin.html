@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Panel</title>
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+    <button onclick="getAll()">Get All Submissions</button>
+    <button onclick="logout()">Logout</button>
+    <ul id="allSubs"></ul>
+
+    <script>
+        const token = localStorage.getItem("token");
+
+        async function getAll() {
+            const res = await fetch("/submissions", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+            const list = document.getElementById("allSubs");
+            list.innerHTML = "";
+
+            if (Array.isArray(data)) {
+                data.forEach((sub) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `${sub.name} - ${sub.email} - ${sub.message} 
+          <button onclick="deleteSub(${sub.id})">🗑️</button>`;
+                    list.appendChild(li);
+                });
+            } else {
+                list.textContent = data.error || "Failed to fetch.";
+            }
+        }
+
+        async function deleteSub(id) {
+            const res = await fetch(`/submissions/delete/${id}`, {
+                method: "DELETE",
+                headers: {Authorization: `Bearer ${token}`},
+            });
+
+            const result = await res.json();
+            alert(result.message || result.error);
+            getAll();
+        }
+
+        function logout() {
+            localStorage.removeItem("token");
+            window.location.href = "/login.html";
+        }
+    </script>
+</body>
+
+</html>

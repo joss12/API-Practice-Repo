@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1760125860385,
+    "name": "Eddy",
+    "email": "eddy@sk.com",
+    "message": "Persistence fixed!",
+    "date": "2025-10-10T19:51:00.385Z"
+  },
+  {
+    "id": 1760179902796,
+    "name": "Eddy",
+    "email": "axelmouity7email@gmail.com",
+    "message": "This should send email",
+    "date": "Sat Oct 11 2025 10:51:42 GMT+0000 (Coordinated Universal Time)"
+  },
+  {
+    "id": 1760180089581,
+    "name": "Eddy",
+    "email": "axelmouity7@gmail.com",
+    "message": "This should send email",
+    "date": "Sat Oct 11 2025 10:54:49 GMT+0000 (Coordinated Universal Time)"
+  },
+  {
+    "id": 1760228978858,
+    "name": "Test User",
+    "email": "user@sk.com",
+    "message": "This is mine!",
+    "date": "Sun Oct 12 2025 00:29:38 GMT+0000 (Coordinated Universal Time)"
+  }
+]

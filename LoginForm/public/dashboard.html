@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 90%;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .left-panel {
+            flex: 1;
+            background-color: #2c2c2c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .left-panel h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .left-panel button {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+            transition: background 0.3s ease;
+        }
+
+        .left-panel button:hover {
+            background: #555;
+        }
+
+        .right-panel {
+            flex: 1.2;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input,
+        textarea {
+            margin-bottom: 1rem;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button.submit {
+            background: #2c2c2c;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button.submit:hover {
+            background: #1a1a1a;
+        }
+
+        #submissions {
+            margin-top: 2rem;
+            color: whitesmoke;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-left: 1rem;
+        }
+
+        #submissions li {
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #2c2c2c;
+            padding-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-panel button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Welcome to Dashboard</h1>
+            <button onclick="loadSubmissions()">📄 My Submissions</button>
+            <button onclick="logout()">🚪 Logout</button>
+
+            <ul id="submissions"></ul>
+        </div>
+
+        <div class="right-panel">
+            <h2>Submit New Form</h2>
+            <form id="submissionForm">
+                <input name="name" placeholder="Name" required />
+                <input name="email" placeholder="Email" required />
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <button type="submit" class="submit">Submit</button>
+            </form>
+            <p id="formResult"></p>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem("token");
+
+        async function loadSubmissions() {
+            const res = await fetch("/submissions/my-submissions", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await res.json();
+            const list = document.getElementById("submissions");
+            list.innerHTML = "";
+
+            if (Array.isArray(data)) {
+                data.forEach((sub) => {
+                    const li = document.createElement("li");
+                    li.textContent = `${sub.name} - ${sub.message}`;
+                    list.appendChild(li);
+                });
+            } else {
+                list.textContent = data.error || "Failed to load submissions.";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("token");
+            window.location.href = "/login.html";
+        }
+
+        const form = document.getElementById("submissionForm");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const payload = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value,
+            };
+
+            const res = await fetch("/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const json = await res.json();
+
+            const result = document.getElementById("formResult");
+            result.textContent = json.message || json.error;
+
+            if (json.message) {
+                // ✅ Clear form fields
+                form.reset();
+
+                // ✅ Instantly update the submissions list
+                const li = document.createElement("li");
+                li.textContent = `${payload.name} - ${payload.message}`;
+                document.getElementById("submissions").prepend(li);
+                document.getElementById("formResult").style.color = "green";
+                document.getElementById("formResult").textContent =
+                    json.message || "Submitted!";
+                form.reset();
+            }
+        });
+    </script>
+</body>
+
+</html>

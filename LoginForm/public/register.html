@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Register</title>
+</head>
+
+<body>
+    <form id="registerForm">
+        <h1>Register</h1>
+        <input type="text" name="name" placeholder="Full Name" required /><br />
+        <input type="email" name="email" placeholder="Email" required /><br />
+        <input type="password" name="password" placeholder="Password" required /><br />
+        <select name="role">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select><br />
+        <button type="submit">Register</button>
+        <p style="text-align: center; margin-top: 1rem">
+            Already have an account?
+            <a href="/login.html">Login here</a>
+        </p>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const data = {
+                name: form.name.value,
+                email: form.email.value,
+                password: form.password.value,
+                role: form.role.value,
+            };
+
+            const res = await fetch("/auth/register", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data),
+            });
+
+            const json = await res.json();
+            document.getElementById("result").textContent =
+                json.message || json.error;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1760130394604,
+    "name": "Admin",
+    "email": "admin@sk.com",
+    "password": "$2b$10$5Vn4hbWK2cfzRGJ/U40j9.UztK2iAv9YCsbmrpBcWxhCDaWmcj5ZO",
+    "role": "admin"
+  },
+  {
+    "id": 1760216696418,
+    "name": "Test",
+    "email": "test1760216696265@example.com",
+    "password": "$2b$10$DLVmWer6iqV4ZyaMWuXH/OxwQEnE494JD2Wuvap6rx9FnKJ6dUbdm",
+    "role": "user"
+  },
+  {
+    "id": 1760217523091,
+    "name": "Test",
+    "email": "test1760217522934@example.com",
+    "password": "$2b$10$br9o8FeXYB.4jWmCaa7iQ.dqYwSpSYqRbWF8MINTPMgyHdum5hYSG",
+    "role": "user"
+  },
+  {
+    "id": 1760217832390,
+    "name": "Test",
+    "email": "test1760217832197@example.com",
+    "password": "$2b$10$IVCCy8P697A.aKTVxoc3Qeuec2C1YQNI3h4bnCl8grpjZ1nEhroG6",
+    "role": "user"
+  },
+  {
+    "id": 1760219166795,
+    "name": "Test",
+    "email": "test1760219166637@example.com",
+    "password": "$2b$10$CDm20DJy/VMiGzl0qWVZLuG1PwrB61On5ExinAydgs9mtVz8l0vaK",
+    "role": "user"
+  },
+  {
+    "id": 1760219614496,
+    "name": "Test",
+    "email": "test1760219614343@example.com",
+    "password": "$2b$10$n5cfad6VUM5kdsbSvI35YOdm1nDCwKux1M0VC8tVhhco.slqWICMC",
+    "role": "user"
+  },
+  {
+    "id": 1760219687036,
+    "name": "Test",
+    "email": "test1760219686895@example.com",
+    "password": "$2b$10$cqi2J90uZSh3n4Qb4OiXReZSu6.DCLKEymJUeo6nRJP0y.5WZh2i6",
+    "role": "user"
+  },
+  {
+    "id": 1760219755057,
+    "name": "Test",
+    "email": "test1760219754912@example.com",
+    "password": "$2b$10$m4Ypo.QA/WYAVP1xdoXuFuWQcvkkUixBervaQ7a4slQA0pimrQlOW",
+    "role": "user"
+  },
+  {
+    "id": 1760219823284,
+    "name": "Test",
+    "email": "test1760219823139@example.com",
+    "password": "$2b$10$YF5JYutfH32uPDfOxKm0SOsHxHL0oM9qFdbiDzh2D6D2cFALPel06",
+    "role": "user"
+  },
+  {
+    "id": 1760219937267,
+    "name": "Test",
+    "email": "test1760219937130@example.com",
+    "password": "$2b$10$6p4/ujKkSLh9PhWDp3rzsOMp5dQdWe7h.6tasXTvw4bIZubSRXdru",
+    "role": "user"
+  },
+  {
+    "id": 1760220088891,
+    "name": "Test",
+    "email": "test1760220088751@example.com",
+    "password": "$2b$10$jVretZCQS6/QhAcM1emUYe.gEvjLTQkxfka.Aq4PMqDSSdNDfu.B.",
+    "role": "user"
+  },
+  {
+    "id": 1760224120971,
+    "name": "Test",
+    "email": "test1760224120804@example.com",
+    "password": "$2b$10$.MBmcAVihN35IgymAtVyvOZgHXIqHcVtkNbtPnpQhU8TPMnWbK7vq",
+    "role": "user"
+  },
+  {
+    "id": 1760224158568,
+    "name": "Test",
+    "email": "test1760224158406@example.com",
+    "password": "$2b$10$U1SBbfpPAA4.ZI9j2hmyfenatxCkrE/chfUH.tATSbFY.h6e8G7yq",
+    "role": "user"
+  },
+  {
+    "id": 1760224371872,
+    "name": "Test",
+    "email": "test1760224371742@example.com",
+    "password": "$2b$10$7kks9TBMG80AN7KXucfPguS6feX9bBWj6ECakAG1qcI45zq4lQVcW",
+    "role": "user"
+  },
+  {
+    "id": 1760224421289,
+    "name": "Test",
+    "email": "test1760224421146@example.com",
+    "password": "$2b$10$3RVz2oeExIAtHodLJ4hFNe47EBHI8c/gNrlPhUcpPggSsU8nfvIrK",
+    "role": "user"
+  },
+  {
+    "id": 1760224441709,
+    "name": "Test",
+    "email": "test1760224441593@example.com",
+    "password": "$2b$10$Hk.WmI7NFNOTrY7GzNlMAO/G7W09q4ysIUQLEEbcAs0XWo8/c8KPe",
+    "role": "user"
+  },
+  {
+    "id": 1760226567870,
+    "name": "TestUser",
+    "email": "user@sk.com",
+    "password": "$2b$10$1vL635XhSXoBsrmbBrhiS.m6QrLvUZw3uufoGyOhY/t.E3uQxStA2",
+    "role": "user"
+  },
+  {
+    "id": 1760274798577,
+    "name": "BornToShine",
+    "email": "eg@email.com",
+    "password": "$2b$10$52llZZG8VFLtxU8AjzHmduFNOz/O2jLvv0hV6OWoXPn1KNoxPcyja",
+    "role": "admin"
+  },
+  {
+    "id": 1760280230977,
+    "name": "eg12",
+    "email": "axelmouity7@gmail.com",
+    "password": "$2b$10$w2E8ramG3DGioOsbVd8Qju.ughNWmc801xPCTea/FgwOqdUZEZmay",
+    "role": "user"
+  },
+  {
+    "id": 1760280237192,
+    "name": "eg12",
+    "email": "axelmouity7@gmail.com",
+    "password": "$2b$10$D3RHP87/WHZ1T7Ad57SPv.gkpMtcjcooLxCeoR5T7Gs4ACo0XvvuO",
+    "role": "admin"
+  },
+  {
+    "id": 1760283094059,
+    "name": "John Doe",
+    "email": "john@email.com",
+    "password": "$2b$10$rdIzF5KAKenwhQTjtaMWW.x6gHIYAjKprl2iZ4mbK4knc3zzzVCie",
+    "role": "admin"
+  },
+  {
+    "id": 1760283170861,
+    "name": "Grace Esther",
+    "email": "gracee@email.com",
+    "password": "$2b$10$n81MLU7IAdqYSrNjwCrInOPQ9vy.b1HONldYFuqM/tfVvID.FIRXi",
+    "role": "admin"
+  }
+]

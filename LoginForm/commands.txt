@@ -1,0 +1,29 @@
+## LoginForm with rate llimiter
+
+---- To post a new user ----
+
+curl -X POST http://localhost:8080/auth/register \
+ -H "Content-Type: application/json" \
+ -d '{"name":"Admin","email":"admin@sk.com","password":"123456","role":"admin"}'
+
+-- If everything implemeted correctly, the output will be:
+{"message":"User registerd!"}%
+
+---- To Login a User ----
+curl -X POST http://localhost:8080/auth/login \
+ -H "Content-Type: application/json" \
+ -d '{"email":"admin@sk.com","password":"123456"}'
+
+---- To submit a user/admin ----
+curl -X POST http://localhost:3000/submit \
+ -H "Content-Type: application/json" \
+ -d '{"name": "Eddy", "email": "eddy@sk.com", "message": "Hey, love the LogiForm!"}'
+
+
+---- My-submissions ----
+curl http://localhost:8080/submissions/my-submissions \                              -H "Authorization: Bearer <yoour_token>"
+
+
+---- To delete a user(only if you're admin) ----
+ curl -X DELETE http://localhost:8080/submissions/delete/:id \
+ -H "Authorization: Bearer <your_token>"
