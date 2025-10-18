@@ -1,0 +1,16 @@
+---- To test the API ----
+curl -H "X-API-KEY: supersecretkey" http://localhost:9000/health
+
+The result:
+{"status":"ok"}%
+
+---- To test the PORT ----
+curl -X POST http://localhost:9000/scan \
+  -H "Content-Type: application/json" \
+  -H "X-API-KEY: supersecretkey" \
+  -d '{"host": "scanme.nmap.org"}'
+
+  The result:
+  {"host":"scanme.nmap.org","open_ports":[22,80],"cached":true,"timestamp":"2025-10-16T19:19:36-04:00"}%
+
+
