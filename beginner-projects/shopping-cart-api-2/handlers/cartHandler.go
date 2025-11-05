@@ -1,0 +1,97 @@
+package handlers
+
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/shopping-cart-api-v2/models"
+)
+
+var CartItems []models.Item
+
+// Post /cart/add
+func AddCart(c *fiber.Ctx) error {
+	var item models.Item
+
+	//1.Parse Rquest body
+	if err := c.BodyParser(&item); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid request format",
+		})
+	}
+
+	//2. Check if item with ID already exists
+	for i, existingItem := range CartItems {
+		if existingItem.ID == item.ID {
+			CartItems[i].Quantity += item.Quantity //increase quantity
+			return c.JSON(fiber.Map{"message": "Item quantity updated", "cart": CartItems})
+
+		}
+	}
+
+	//3. If item not found, add it
+	CartItems = append(CartItems, item)
+	return c.JSON(fiber.Map{"message": "Item added to cart", "cart": CartItems})
+}
+
+// Post /cart/remove
+func RemoveFromCart(c *fiber.Ctx) error {
+	type RemoveRequest struct {
+		ID int `json:"id"`
+	}
+
+	var req RemoveRequest
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Invalid request format",
+		})
+	}
+
+	//filter out item by id
+	updateCart := []models.Item{}
+	found := false
+
+	for _, item := range CartItems {
+		if item.ID != req.ID {
+			updateCart = append(updateCart, item)
+		} else {
+			found = true
+		}
+	}
+
+	if !found {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error": "Item not found in cart",
+		})
+	}
+
+	CartItems = updateCart
+
+	return c.JSON(fiber.Map{
+		"message": "Item removed successfully",
+		"cart":    CartItems,
+	})
+}
+
+// Get /Cart/view
+func ViewCart(c *fiber.Ctx) error {
+	return c.JSON(CartItems)
+}
+
+// Get /cart/total
+func GetTotal(c *fiber.Ctx) error {
+	var total float64 = 0
+
+	for _, item := range CartItems {
+		total += item.Price * float64(item.Quantity)
+	}
+
+	return c.JSON(fiber.Map{
+		"total": total,
+	})
+}
+
+// Delete /cart/clear
+func ClearCart(c *fiber.Ctx) error {
+	CartItems = []models.Item{} //reset
+	return c.SendString("cart cleared")
+}

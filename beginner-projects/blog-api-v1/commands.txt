@@ -1,0 +1,6 @@
+curl http://localhost:3002/posts
+curl http://localhost:3002/posts/1
+curl -X POST http://localhost:3002/posts -H "Content-Type: application/json" -d '{"id":"3", "title":"New", "content":"Post content"}'
+curl -X PUT http://localhost:3002/posts/1 -H "Content-Type: application/json" -d '{"id":"1", "title":"Updated", "content":"Updated content"}'
+curl -X DELETE http://localhost:3002/posts/2
+

@@ -1,0 +1,75 @@
+## Run this command first
+docker-compose down
+
+## Run This too:
+docker-compose down -v
+
+## Then run this
+docker-compose build app
+
+## Then run this 
+docker-compose up -d x2 or x3
+
+## Then run this
+docker-compose up --build 
+
+
+## APIs commands
+
+curl -X POST http://localhost:3003/api/register \
+ -H "Content-Type: application/json" \
+ -d '{"name":"Admin","email":"admin@test.com","password":"secret"}'
+
+
+curl -X POST http://localhost:3003/api/login \
+ -H "Content-Type: application/json" \
+ -d '{"email":"admin@test.com","password":"secret"}'
+
+curl http://localhost:3003/api/auth/admin/dashboard \
+ -H "Authorization: Bearer "
+
+curl -X PUT http://localhost:3003/api/promote/1
+
+curl -X POST http://localhost:3003/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@test.com","password":"123456"}'
+
+curl http://localhost:3003/api/auth/admin/users \
+  -H "Authorization: Bearer <admin-token>"
+
+curl -X PUT http://localhost:3003/api/auth/admin/promote/2 \
+  -H "Authorization: Bearer <admin-token>"
+
+curl -X DELETE http://localhost:3003/api/auth/admin/delete/2 \
+  -H "Authorization: Bearer <admin-token>"
+
+
+## For Example Reset Password:
+curl -X POST http://localhost:3003/api/register \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Eddy","email":"egs@site.com","password":"123456"}'
+
+
+## Then run this:
+curl -X POST http://localhost:3003/api/forgot-password \
+  -H "Content-Type: application/json" \
+  -d '{"email":"egs@site.com"}'
+
+
+  ## This command will allow you to get the token:
+  docker-compose logs app
+
+## After getting the token, copy and past it into "your_token" and change your password:
+  curl -X POST http://localhost:3003/api/reset-password \
+  -H "Content-Type: application/json" \
+  -d '{"token":"<your_token>", "new_password":"newpass123"}'
+
+
+## Then Login Again with your new password:
+curl -X POST http://localhost:3003/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"gs@site.com", "password":"newpass123"}'
+
+
+
+

@@ -1,0 +1,32 @@
+## Create Posts
+
+POST http://localhost:3002/posts
+Content-Type: application/json
+
+{
+  "title": "First Post",
+  "content": "Hello World",
+  "author": "Eddy",
+  "tags": ["go", "fiber"]
+}
+
+
+# Get all posts
+curl http://localhost:3002/posts
+
+  Filter by author
+curl http://localhost:3002/posts?author=Eddy
+
+# Filter by tag
+curl http://localhost:3002/posts?tag=fiber
+
+# Get one post
+curl http://localhost:3002/posts/{id}
+
+# Update a post
+curl -X PUT http://localhost:3002/posts/{id} \
+-H "Content-Type: application/json" \
+-d '{"title":"Updated","content":"New","author":"Eddy","tags":["go"]}'
+
+# Delete a post
+curl -X DELETE http://localhost:3002/posts/{id}

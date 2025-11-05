@@ -1,0 +1,19 @@
+---- To Create a cart ----
+curl -X POST http://localhost:3002/cart/add \
+  -H "Content-Type: application/json" \
+  -d '{"id":1,"name":"USB3","price":2.5,"quantity":3}'
+
+---- To Get the carts ----
+curl http://localhost:3002/cart/view
+
+---- To remove cart/:id ----
+curl -X POST http://localhost:3002/cart/remove \
+  -H "Content-Type: application/json" \
+  -d '{"id":1}'
+
+---- To get the total ----
+ curl http://localhost:3002/cart/total
+
+---- To Delete cart ----
+curl -X DELETE http://localhost:3002/cart/clear
+

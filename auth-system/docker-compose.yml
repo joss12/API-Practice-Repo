@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_auth
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: authdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+      interval: 3s
+
+  app:
+    build: .
+    container_name: go_auth_app
+    depends_on:
+      mysql:
+        condition: service_healthy  # Wait for MySQL to be healthy
+    ports:
+      - "3003:3003"
+    environment:
+      DB_URL: root:root@tcp(mysql:3306)/authdb?parseTime=true
+      JWT_SECRET: supersecretkey
+      PORT: 3003
+    restart: on-failure  # Restart if it fails initially
+    command: ["./auth-system"]
+
+volumes:
+  mysql_data:

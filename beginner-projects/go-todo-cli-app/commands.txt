@@ -1,0 +1,16 @@
+---- Commands ----
+
+# Create a todo
+curl -X POST http://localhost:3002/todos -H "Content-Type: application/json" -d '{"title":"Buy milk"}'
+
+# Get all todos
+curl http://localhost:3002/todos
+
+# Toggle completion
+curl -X PUT http://localhost:3002/todos/1
+
+# Filter by completed status
+curl http://localhost:3002/todos?completed=true
+
+# Delete todo
+curl -X DELETE http://localhost:3002/todos/1
