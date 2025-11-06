@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MindMapVault Graph</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f5f5f5;
+        padding: 2rem;
+        max-width: 900px;
+        margin: auto;
+      }
+      #mermaid {
+        background: #fff;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      input,
+      select {
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        border: none;
+        background: black;
+        color: white;
+        cursor: pointer;
+      }
+      #message {
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MindMapVault Graph</h1>
+
+    <form id="form">
+      <label>
+        Type:
+        <select id="type">
+          <option value="node">Add Node</option>
+          <option value="edge">Add Edge</option>
+        </select>
+      </label>
+
+      <!-- Node Fields -->
+      <div id="node-fields">
+        <label>
+          Node ID:
+          <input type="text" id="id" placeholder="e.g. react" />
+        </label>
+
+        <label>
+          Node Label:
+          <input type="text" id="label" placeholder="e.g. ReactJS" />
+        </label>
+      </div>
+
+      <!-- Edge Fields -->
+      <div id="edge-fields" style="display: none">
+        <label>
+          From:
+          <input type="text" id="from" placeholder="e.g. react" />
+        </label>
+
+        <label>
+          To:
+          <input type="text" id="to" placeholder="e.g. jsx" />
+        </label>
+      </div>
+
+      <button type="submit">Add</button>
+    </form>
+
+    <div id="message"></div>
+    <div id="mermaid">Loading...</div>
+
+    <div id="message"></div>
+
+    <div id="mermaid">Loading...</div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
