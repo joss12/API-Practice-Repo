@@ -1,0 +1,14 @@
+## To test the app:
+curl -X POST http://localhost:4000/api/login
+
+## Returns:
+{ "token": "eyJhbGciOi..." }
+
+## To verify the token:
+curl -H "Authorization: Bearer YOUR_TOKEN_HERE" http://localhost:4000/api/secure
+
+## Returns:
+{ "message": "✅ Access Granted", "user": { "userId": "abc123", "iat": ..., "exp": ... } }
+
+
+
