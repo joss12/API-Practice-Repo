@@ -1,0 +1,48 @@
+name: GoTasker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.3
+        ports: [ "3306:3306" ]
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: gotasker
+          MYSQL_USER: egs
+          MYSQL_PASSWORD: eg12
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Run tests
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_USER: egs
+          DB_PASSWORD: eg12
+          DB_NAME: gotasker
+          JWT_SECRET: SUPERSAFETOKEN_KEY_CHANGE_THIS
+        run: go test ./... -v -coverprofile=coverage.out
+

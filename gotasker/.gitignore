@@ -1,2 +1,5 @@
-
 .env
+go.mod
+go.sum
+commands.txt
+comands2.txt

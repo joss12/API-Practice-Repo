@@ -1,0 +1,21 @@
+mode: set
+github.com/gotasker/cmd/server/main.go:10.13,18.2 5 0
+github.com/gotasker/internal/config/config.go:10.16,11.40 1 0
+github.com/gotasker/internal/config/config.go:11.40,13.3 1 0
+github.com/gotasker/internal/config/config.go:16.32,18.2 1 0
+github.com/gotasker/internal/router/router.go:9.28,32.2 14 0
+github.com/gotasker/internal/middlewares/auth.go:13.35,18.2 1 0
+github.com/gotasker/internal/middlewares/auth.go:20.36,21.34 1 0
+github.com/gotasker/internal/middlewares/auth.go:21.34,23.56 2 0
+github.com/gotasker/internal/middlewares/auth.go:23.56,25.4 1 0
+github.com/gotasker/internal/middlewares/auth.go:27.3,28.77 2 0
+github.com/gotasker/internal/middlewares/auth.go:28.77,30.4 1 0
+github.com/gotasker/internal/middlewares/auth.go:31.3,31.33 1 0
+github.com/gotasker/internal/middlewares/auth.go:31.33,33.4 1 0
+github.com/gotasker/internal/middlewares/auth.go:35.3,36.10 2 0
+github.com/gotasker/internal/middlewares/auth.go:36.10,38.4 1 0
+github.com/gotasker/internal/middlewares/auth.go:40.3,42.18 3 0
+github.com/gotasker/internal/middlewares/rbac.go:9.46,10.34 1 0
+github.com/gotasker/internal/middlewares/rbac.go:10.34,16.24 4 0
+github.com/gotasker/internal/middlewares/rbac.go:16.24,18.4 1 0
+github.com/gotasker/internal/middlewares/rbac.go:19.3,19.18 1 0

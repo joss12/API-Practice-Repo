@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gotasker/internal/confing"
+	"github.com/gotasker/internal/config"
+	"github.com/gotasker/internal/models"
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
@@ -12,13 +14,14 @@ var DB *gorm.DB
 
 func ConnectDB() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
-		confing.GetEnv("DB_USER"),
-		confing.GetEnv("DB_PASSWORD"),
-		confing.GetEnv("DB_HOST"),
-		confing.GetEnv("DB_PORT"),
-		confing.GetEnv("DB_NAME"),
+		config.GetEnv("DB_USER"),
+		config.GetEnv("DB_PASSWORD"),
+		config.GetEnv("DB_HOST"),
+		config.GetEnv("DB_PORT"),
+		config.GetEnv("DB_NAME"),
 	)
 
+	//db, err := gorm.Open(mysqlDriver.Open(dsn), &gorm.Config{})
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connected to DB:", err)
