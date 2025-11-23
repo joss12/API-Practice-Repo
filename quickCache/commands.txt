@@ -1,0 +1,16 @@
+## Set value
+curl -X POST http://localhost:3000/cache \
+  -H "Content-Type: application/json" \
+  -d '{"key": "hello", "value": "world", "ttl": 10}'
+
+## Get value
+curl http://localhost:3000/cache/hello
+
+## Can't get the value after 10 seconds:
+curl http://localhost:3000/cache/hello
+# => Not found or expired
+
+
+## Views stats
+curl http://localhost:3000/cache/stats/info
+
